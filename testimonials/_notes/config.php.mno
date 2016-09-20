@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_all_testimonials" value="name:testimonials_title;datatype:string,name:testimonials_url;datatype:string,name:testimonials_image;datatype:string,name:testimonials_html_text;datatype:blob,name:testimonials_mail;datatype:blob,name:testimonials_company;datatype:string,name:testimonials_city;datatype:string,name:testimonials_country;datatype:string,name:testimonials_show_email;datatype:string,name:date_added;datatype:datetime" />
+</info>
