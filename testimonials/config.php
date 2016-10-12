@@ -3,14 +3,16 @@
 require('database.class.php');
 
 /** MySQL database username */
-define('DB_USERNAME', 'guru_hawkwynd');
+define('DB_USERNAME', 'database_username_here');
 /** MySQL database password */
-define('DB_PW', 'scootre');
+define('DB_PW', 'database_password_here');
 /** MySQL hostname */
 define('DB_HOST', 'localhost');
 /* MySQL DB name */
 define('DB_DATABASE','guru_testimony');
 define('TABLE_TESTIMONIALS','testimonials_manager');
+define('URL_LINK', "http://www.example.com/testimonials/index.php?r=");
+define('EMAIL_LINK', "{email address here}");
 
 
 function insertNewTestimonial($testimonial) {
@@ -50,9 +52,9 @@ if ($_POST) {
 	$primary_id = $db->query_insert(testimonials_manager, $data);
 	
 	$message = "A new testimonial has been added to the database on musiccityguru.com and requires approval.\n";
-	$message .= "http://www.musiccityguru.com/testimonials/index.php?r=". $primary_id. "\n";
+	$message .= URL_LINK . $primary_id. "\n";
 			
-	mail('scott@musiccityguru.com','New Testimonial' .$primary_id. ' Added', $message, null);
+	mail(EMAIL_LINK,'New Testimonial' .$primary_id. ' Added', $message, null);
 	
 	echo 'New record added. <a href="index.php">Return to listing</a>';
 	
@@ -63,12 +65,13 @@ if ($_POST) {
 /* Show all records */
 
 function listAllRecs () {
-	
+	$results ="";
+
 // execute connection to db
 	$db = new Database(DB_HOST, DB_USERNAME, DB_PW, DB_DATABASE);
 	$db->connect();
 	
-	//$sql = "select * from ". TABLE_TESTIMONIALS. " where testimonials_status = 0";
+
 	$sql = "select * from ". TABLE_TESTIMONIALS;
 	$rows = $db->fetch_all_array($sql);
 
@@ -152,10 +155,6 @@ function WriteXMLFile () {
 
 function createEmptyForm() {
 
-		//DEBUG		
-		//print (DB_HOST . '-'. DB_USERNAME .'-'. DB_PW .'-'. DB_DATABASE);
-		
-		
 		
 		$db = new Database(DB_HOST, DB_USERNAME, DB_PW, DB_DATABASE);
 		$db->connect();
@@ -299,7 +298,7 @@ if ($_POST) {
 	// execute UPDATE 
 	$db = new Database(DB_HOST, DB_USERNAME, DB_PW, DB_DATABASE);
 	$db->connect();
-	$db->query_update(testimonials_manager, $data, "testimonials_id=" .$record_id );
+	$db->query_update('testimonials_manager', $data, "testimonials_id=" .$record_id );
 		
 	return 'Successful update to the database. <a href=./>Return to listing</a><br/><a href="writeXML.php">Write the XML</a>';
 		
